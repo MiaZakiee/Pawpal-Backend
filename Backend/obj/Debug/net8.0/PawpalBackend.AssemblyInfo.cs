@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PawpalBackend")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f83b526b774327937a92b3eb33e5107f1530e258")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+27681caa1855ac1e37a0364b5bf27bba3739e7fb")]
 [assembly: System.Reflection.AssemblyProductAttribute("PawpalBackend")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PawpalBackend")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

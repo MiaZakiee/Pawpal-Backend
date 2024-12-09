@@ -1,6 +1,6 @@
-using System;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using System.Collections.Generic;
 using PawpalBackend.Utils;
 using System.Collections.Generic;
 
@@ -47,6 +47,14 @@ namespace PawpalBackend.Models
 
         [BsonElement("PhoneNumber")]
         public string PhoneNumber { get; set; }
+
+        [BsonElement("Bio")]
+        public string Bio { get; set; }
+
+        [BsonElement("ProfilePicture")]
+        public byte[] ProfilePicture { get; set; }
+        [BsonElement("Services")]
+        public List<string> Services { get; set; } = new List<string>();
 
         // List of pet IDs associated with this user
         [BsonElement("Pets")]

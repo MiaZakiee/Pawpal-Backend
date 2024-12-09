@@ -2,7 +2,9 @@ using MongoDB.Driver;
 using PawpalBackend.Models;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System;
@@ -46,5 +48,37 @@ namespace PawpalBackend.Services
         // Remove user 
         public async Task RemoveAsync(string id) =>
             await _usersCollection.DeleteOneAsync(x => x.Id == id);
+
+        // Byte array conversion
+        public async Task<byte[]> ConvertToByteArrayAsync(IFormFile file)
+        {
+            using var memoryStream = new MemoryStream();
+            await file.CopyToAsync(memoryStream);
+            return memoryStream.ToArray();
+        }
+
+        // Add service to user
+        public async Task AddServiceToUserAsync(string userId, string serviceId)
+        {
+            var update = Builders<User>.Update.AddToSet(u => u.Services, serviceId);
+            await _usersCollection.UpdateOneAsync(u => u.Id == userId, update);
+        }
+
+        // Remove service from user
+        public async Task RemoveServiceFromUserAsync(string userId, string serviceId)
+        {
+            var update = Builders<User>.Update.Pull(u => u.Services, serviceId);
+            await _usersCollection.UpdateOneAsync(u => u.Id == userId, update);
+        }
+
+        public async Task SaveProfilePictureAsync(string userId, IFormFile file)
+        {
+            var user = await _usersCollection.Find(u => u.Id == userId).FirstOrDefaultAsync();
+            if (user != null)
+            {
+                user.ProfilePicture = await ConvertToByteArrayAsync(file);
+                await _usersCollection.ReplaceOneAsync(u => u.Id == userId, user);
+            }
+        }
     }
 }

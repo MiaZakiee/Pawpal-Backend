@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using PawpalBackend.Models;
 using PawpalBackend.Services;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 [ApiController]
@@ -40,6 +41,15 @@ public class UserController : ControllerBase
     public IActionResult Test()
     {
         return Ok("Hello World");
+    }
+
+    [HttpGet("{id}/profile-picture")]
+    public async Task<IActionResult> GetProfilePicture(string id) {
+        var user = await _userService.GetAsync(id);
+        if (user?.ProfilePicture == null) {
+            return File(user.ProfilePicture, "image/jpeg/png");
+        }
+        return NotFound();
     }
 }
 
