@@ -11,3 +11,8 @@ Backend/obj/Debug/net8.0/PawpalBackend.GeneratedMSBuildEditorConfig.editorconfig
 *.csproj.nuget.dgspec.json
 *.cache
 Backend/obj/project.assets.json
+*.dll
+*.pdb
+*.deps.json
+*AssemblyInfo.cs
+*.sourcelink.json

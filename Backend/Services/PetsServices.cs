@@ -23,7 +23,7 @@ namespace PawpalBackend.Services
 
         // Find all pets given a user's id
         public async Task<List<Pet>> GetPetsForUserAsync(string userId) =>
-            await _petsCollection.Find(x => x.Owner == new ObjectId(userId)).ToListAsync();
+            await _petsCollection.Find(x => x.Owner == userId).ToListAsync();
 
         // Create pet
         public async Task CreatePetAsync(Pet newPet) =>

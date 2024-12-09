@@ -24,8 +24,6 @@ namespace PawpalBackend.Models
         public int Age { get; set; }
 
         [BsonElement("owner")]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public ObjectId Owner { get; } // References the user's _id
+        public string Owner { get; set; } // Owner should be a user ID
     }
-
 }
