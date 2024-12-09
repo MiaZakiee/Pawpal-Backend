@@ -2,6 +2,7 @@ using System;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using PawpalBackend.Utils;
+using System.Collections.Generic;
 
 namespace PawpalBackend.Models
 {
@@ -47,5 +48,8 @@ namespace PawpalBackend.Models
         [BsonElement("PhoneNumber")]
         public string PhoneNumber { get; set; }
 
+        // List of pet IDs associated with this user
+        [BsonElement("Pets")]
+        public List<ObjectId> Pets { get; set; } = new List<ObjectId>();
     }
 }

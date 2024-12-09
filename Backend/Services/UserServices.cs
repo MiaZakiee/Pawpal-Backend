@@ -3,18 +3,24 @@ using PawpalBackend.Models;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using System;
+using System.Linq;
 
 namespace PawpalBackend.Services
 {
     public class UserService
     {
         private readonly IMongoCollection<User> _usersCollection;
+        private readonly IMongoCollection<Pet> _petsCollection;
 
         public UserService(IOptions<DatabaseSettings> databaseSettings)
         {
             var mongoClient = new MongoClient(databaseSettings.Value.ConnectionString);
             var database = mongoClient.GetDatabase(databaseSettings.Value.DatabaseName);
             _usersCollection = database.GetCollection<User>(databaseSettings.Value.UsersCollectionName);
+            _petsCollection = database.GetCollection<Pet>(databaseSettings.Value.PetsCollectionName);
         }
 
         // Find all users

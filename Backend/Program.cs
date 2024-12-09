@@ -17,6 +17,7 @@ builder.Services.Configure<DatabaseSettings>(
 
 // Register UserService as a singleton
 builder.Services.AddSingleton<UserService>();
+builder.Services.AddSingleton<PetsService>();
 
 // Define a CORS policy
 builder.Services.AddCors(options =>

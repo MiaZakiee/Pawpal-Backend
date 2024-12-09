@@ -2,16 +2,18 @@ using Microsoft.AspNetCore.Mvc;
 using PawpalBackend.Models;
 using PawpalBackend.Services;
 using System.Threading.Tasks;
+using MongoDB.Bson;
+using System.Linq;
 
-[ApiController]
+// [ApiController]
 // [Route("api/[controller]")]
 // removed for simplicity
-[Route("homepage")]
-public class HomepageController : ControllerBase
+[Route("users")]
+public class UsersController : ControllerBase
 {
     private readonly UserService _userService;
 
-    public HomepageController(UserService userService)
+    public UsersController(UserService userService)
     {
         _userService = userService;
     }
@@ -54,5 +56,4 @@ public class HomepageController : ControllerBase
 
         return CreatedAtAction(nameof(Login), newUser);
     }
-
 }
