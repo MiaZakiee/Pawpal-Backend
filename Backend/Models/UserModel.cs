@@ -1,4 +1,3 @@
-using System;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using PawpalBackend.Utils;
@@ -46,6 +45,11 @@ namespace PawpalBackend.Models
 
         [BsonElement("PhoneNumber")]
         public string PhoneNumber { get; set; }
+        
+        [BsonElement("Bio")]
+        public string Bio { get; set; }
 
+        [BsonElement("ProfilePicture")]
+        public byte [] ProfilePicture { get; set; }
     }
 }

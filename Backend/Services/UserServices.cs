@@ -1,8 +1,10 @@
-using MongoDB.Driver;
+using MongoDB.Driver; 
 using PawpalBackend.Models;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace PawpalBackend.Services
 {
@@ -40,5 +42,22 @@ namespace PawpalBackend.Services
         // Remove user 
         public async Task RemoveAsync(string id) =>
             await _usersCollection.DeleteOneAsync(x => x.Id == id);
+
+        // Byte array conversion
+        public async Task<byte[]> ConvertToByteArrayAsync(IFormFile file) {
+            using var memoryStream = new MemoryStream();
+            await file.CopyToAsync(memoryStream);
+            return memoryStream.ToArray();
+        }
+
+        public async Task SaveProfilePictureAsync(string userId, IFormFile file)
+        {
+            var user = await _usersCollection.Find(u => u.Id == userId).FirstOrDefaultAsync();
+            if (user != null)
+            {
+                user.ProfilePicture = await ConvertToByteArrayAsync(file);
+                await _usersCollection.ReplaceOneAsync(u => u.Id == userId, user);
+            }
+        }
     }
 }
