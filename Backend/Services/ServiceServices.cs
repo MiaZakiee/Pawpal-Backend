@@ -24,5 +24,13 @@ namespace PawpalBackend.Services
         // Find all services
         public async Task<List<Service>> GetAllServicesAsync() =>
             await _servicesCollection.Find(_ => true).ToListAsync();
+
+        // Create a service
+        public async Task CreateServiceAsync(Service newService) =>
+            await _servicesCollection.InsertOneAsync(newService);
+
+        // Delete a service
+        public async Task DeleteServiceAsync(string id) =>
+            await _servicesCollection.DeleteOneAsync(s => s.Id == id);
     }
 }
