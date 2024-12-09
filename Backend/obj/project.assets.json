@@ -76,7 +76,7 @@
           }
         }
       },
-      "MongoDB.Bson/3.0.0": {
+      "MongoDB.Bson/3.1.0": {
         "type": "package",
         "dependencies": {
           "System.Memory": "4.5.5",
@@ -93,12 +93,12 @@
           }
         }
       },
-      "MongoDB.Driver/3.0.0": {
+      "MongoDB.Driver/3.1.0": {
         "type": "package",
         "dependencies": {
           "DnsClient": "1.6.1",
           "Microsoft.Extensions.Logging.Abstractions": "2.0.0",
-          "MongoDB.Bson": "3.0.0",
+          "MongoDB.Bson": "3.1.0",
           "SharpCompress": "0.30.1",
           "Snappier": "1.0.0",
           "System.Buffers": "4.5.1",
@@ -344,10 +344,10 @@
         "version.txt"
       ]
     },
-    "MongoDB.Bson/3.0.0": {
-      "sha512": "qnPRJ58HXDh7C4oxTf6YB7BJhlCGJIa6TMXhzImw6zk44lrAomQXTB6AtoQ5lNJbkyrgQcT7+smsKFMnXmLXhw==",
+    "MongoDB.Bson/3.1.0": {
+      "sha512": "3dhaZhz18B5vUoEP13o2j8A6zQfkHdZhwBvLZEjDJum4BTLLv1/Z8bt25UQEtpqvYwLgde4R6ekWZ7XAYUMxuw==",
       "type": "package",
-      "path": "mongodb.bson/3.0.0",
+      "path": "mongodb.bson/3.1.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -358,15 +358,15 @@
         "lib/net6.0/MongoDB.Bson.xml",
         "lib/netstandard2.1/MongoDB.Bson.dll",
         "lib/netstandard2.1/MongoDB.Bson.xml",
-        "mongodb.bson.3.0.0.nupkg.sha512",
+        "mongodb.bson.3.1.0.nupkg.sha512",
         "mongodb.bson.nuspec",
         "packageIcon.png"
       ]
     },
-    "MongoDB.Driver/3.0.0": {
-      "sha512": "udcP8rOhyuhLDn3sGVdNUgQSXfKGPaIP4w09XVKf4xdy66YSXinhkIuQSuOeZVHdTFsG2PpUbRx2wyFm7E0EMg==",
+    "MongoDB.Driver/3.1.0": {
+      "sha512": "+O7lKaIl7VUHptE0hqTd7UY1G5KDp/o8S4upG7YL4uChMNKD/U6tz9i17nMGHaD/L2AiPLgaJcaDe2XACsegGA==",
       "type": "package",
-      "path": "mongodb.driver/3.0.0",
+      "path": "mongodb.driver/3.1.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -377,7 +377,7 @@
         "lib/net6.0/MongoDB.Driver.xml",
         "lib/netstandard2.1/MongoDB.Driver.dll",
         "lib/netstandard2.1/MongoDB.Driver.xml",
-        "mongodb.driver.3.0.0.nupkg.sha512",
+        "mongodb.driver.3.1.0.nupkg.sha512",
         "mongodb.driver.nuspec",
         "packageIcon.png"
       ]
@@ -627,24 +627,24 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
-      "MongoDB.Driver >= 3.0.0",
+      "MongoDB.Driver >= 3.1.0",
       "libphonenumber-csharp >= 8.13.49"
     ]
   },
   "packageFolders": {
-    "/home/ninin/.nuget/packages/": {}
+    "/home/rei/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/ninin/Projects/Pawpal-Backend/Backend/PawpalBackend.csproj",
+      "projectUniqueName": "/home/rei/Documents/CSIT321/Pawpal Backend/Pawpal-Backend/Backend/PawpalBackend.csproj",
       "projectName": "PawpalBackend",
-      "projectPath": "/home/ninin/Projects/Pawpal-Backend/Backend/PawpalBackend.csproj",
-      "packagesPath": "/home/ninin/.nuget/packages/",
-      "outputPath": "/home/ninin/Projects/Pawpal-Backend/Backend/obj/",
+      "projectPath": "/home/rei/Documents/CSIT321/Pawpal Backend/Pawpal-Backend/Backend/PawpalBackend.csproj",
+      "packagesPath": "/home/rei/.nuget/packages/",
+      "outputPath": "/home/rei/Documents/CSIT321/Pawpal Backend/Pawpal-Backend/Backend/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/ninin/.nuget/NuGet/NuGet.Config"
+        "/home/rei/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -670,7 +670,7 @@
         "dependencies": {
           "MongoDB.Driver": {
             "target": "Package",
-            "version": "[3.0.0, )"
+            "version": "[3.1.0, )"
           },
           "libphonenumber-csharp": {
             "target": "Package",

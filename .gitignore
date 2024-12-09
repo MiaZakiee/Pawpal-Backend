@@ -7,3 +7,5 @@ Backend/obj/Debug/net8.0/PawpalBackend.AssemblyInfoInputs.cache
 Backend/obj/Debug/net8.0/PawpalBackend.assets.cache
 Backend/obj/Debug/net8.0/PawpalBackend.csproj.AssemblyReference.cache
 Backend/obj/Debug/net8.0/PawpalBackend.GeneratedMSBuildEditorConfig.editorconfig
+
+*.cache

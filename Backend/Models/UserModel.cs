@@ -1,5 +1,6 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using System.Collections.Generic;
 using PawpalBackend.Utils;
 
 namespace PawpalBackend.Models
@@ -51,5 +52,7 @@ namespace PawpalBackend.Models
 
         [BsonElement("ProfilePicture")]
         public byte [] ProfilePicture { get; set; }
+        [BsonElement("Services")]
+        public List<string> Services { get; set; } = new List<string>();
     }
 }

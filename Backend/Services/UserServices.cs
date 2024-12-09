@@ -49,6 +49,20 @@ namespace PawpalBackend.Services
             await file.CopyToAsync(memoryStream);
             return memoryStream.ToArray();
         }
+        
+        // Add service to user
+        public async Task AddServiceToUserAsync(string userId, string serviceId)
+        {
+            var update = Builders<User>.Update.AddToSet(u => u.Services, serviceId);
+            await _usersCollection.UpdateOneAsync(u => u.Id == userId, update);
+        }
+
+        // Remove service from user
+        public async Task RemoveServiceFromUserAsync(string userId, string serviceId)
+        {
+            var update = Builders<User>.Update.Pull(u => u.Services, serviceId);
+            await _usersCollection.UpdateOneAsync(u => u.Id == userId, update);
+        }
 
         public async Task SaveProfilePictureAsync(string userId, IFormFile file)
         {

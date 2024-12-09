@@ -2,10 +2,7 @@ using MongoDB.Driver;
 using PawpalBackend.Models;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
-using System.IO;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using System.Runtime.CompilerServices;
 
 namespace PawpalBackend.Services
 {
@@ -29,7 +26,7 @@ namespace PawpalBackend.Services
             await _bookingCollection.InsertOneAsync(newBooking);
 
         // Get Speciifc Booking
-        public async Task GetBookingByIdAsync(string id) =>
+        public async Task<Booking> GetBookingByIdAsync(string id) =>
             await _bookingCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
 
         // Get Bookings By Recipient
@@ -43,6 +40,20 @@ namespace PawpalBackend.Services
         // Remove Booking
         public async Task RemoveBookingAsync(string id) =>
             await _bookingCollection.DeleteOneAsync(x => x.Id == id);
+
+        // Add service to booking
+        public async Task AddServiceToBookingAsync(string userId, string serviceId)
+        {
+            var update = Builders<Booking>.Update.AddToSet(u => u.Services, serviceId);
+            await _bookingCollection.UpdateOneAsync(u => u.Id == userId, update);
+        }
+
+        // Remove service from booking
+        public async Task RemoveServiceFromBookingAsync(string userId, string serviceId)
+        {
+            var update = Builders<Booking>.Update.Pull(u => u.Services, serviceId);
+            await _bookingCollection.UpdateOneAsync(u => u.Id == userId, update);
+        }
     }
     
 }

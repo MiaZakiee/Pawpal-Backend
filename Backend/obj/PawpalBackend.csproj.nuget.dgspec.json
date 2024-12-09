@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/ninin/Projects/Pawpal-Backend/Backend/PawpalBackend.csproj": {}
+    "/home/rei/Documents/CSIT321/Pawpal Backend/Pawpal-Backend/Backend/PawpalBackend.csproj": {}
   },
   "projects": {
-    "/home/ninin/Projects/Pawpal-Backend/Backend/PawpalBackend.csproj": {
+    "/home/rei/Documents/CSIT321/Pawpal Backend/Pawpal-Backend/Backend/PawpalBackend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/ninin/Projects/Pawpal-Backend/Backend/PawpalBackend.csproj",
+        "projectUniqueName": "/home/rei/Documents/CSIT321/Pawpal Backend/Pawpal-Backend/Backend/PawpalBackend.csproj",
         "projectName": "PawpalBackend",
-        "projectPath": "/home/ninin/Projects/Pawpal-Backend/Backend/PawpalBackend.csproj",
-        "packagesPath": "/home/ninin/.nuget/packages/",
-        "outputPath": "/home/ninin/Projects/Pawpal-Backend/Backend/obj/",
+        "projectPath": "/home/rei/Documents/CSIT321/Pawpal Backend/Pawpal-Backend/Backend/PawpalBackend.csproj",
+        "packagesPath": "/home/rei/.nuget/packages/",
+        "outputPath": "/home/rei/Documents/CSIT321/Pawpal Backend/Pawpal-Backend/Backend/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/ninin/.nuget/NuGet/NuGet.Config"
+          "/home/rei/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -40,7 +40,7 @@
           "dependencies": {
             "MongoDB.Driver": {
               "target": "Package",
-              "version": "[3.0.0, )"
+              "version": "[3.1.0, )"
             },
             "libphonenumber-csharp": {
               "target": "Package",
