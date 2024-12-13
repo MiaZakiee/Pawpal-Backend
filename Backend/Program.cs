@@ -22,11 +22,12 @@ builder.Services.AddSingleton<PetsService>();
 // Define a CORS policy
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll", policy =>
+    options.AddPolicy("AllowSpecificOrigin", builder =>
     {
-        policy.AllowAnyOrigin()
-              .AllowAnyMethod()
-              .AllowAnyHeader();
+        builder.WithOrigins("http://localhost:8081")
+               .AllowAnyHeader()
+               .AllowAnyMethod()
+               .AllowCredentials();
     });
 });
 
@@ -42,7 +43,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 // Enable CORS with the defined policy
-app.UseCors("AllowAll");
+app.UseCors("AllowSpecificOrigin");
 
 app.MapControllers();
 

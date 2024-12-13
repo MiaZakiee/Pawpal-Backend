@@ -18,17 +18,36 @@ public class UsersController : ControllerBase
         _userService = userService;
     }
 
-    [HttpPost("login")]
-    public async Task<IActionResult> Login([FromBody] User user)
+    [HttpGet("available")]
+    public async Task<IActionResult> GetUser([FromQuery] string username, [FromQuery] string email)
     {
-        var userFromDb = await _userService.GetByUsername(user.Username);
+        var user = await _userService.GetByUsername(username);
+        if (user != null)
+        {
+            return Conflict("Username already exists");
+        }
+
+        user = await _userService.GetByEmail(email);
+        if (user != null)
+        {
+            return Conflict("Email already exists");
+        }
+
+        return Ok();
+    }
+
+
+    [HttpPost("login")]
+    public async Task<IActionResult> Login([FromBody] string username, [FromBody] string password)
+    {
+        var userFromDb = await _userService.GetByUsername(username);
 
         if (userFromDb == null)
         {
             return NotFound("User not found");
         }
 
-        if (!userFromDb.VerifyPassword(user.Password))
+        if (!userFromDb.VerifyPassword(password))
         {
             return Unauthorized("Invalid password");
         }
