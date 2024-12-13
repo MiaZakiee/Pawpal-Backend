@@ -48,6 +48,7 @@ app.UseCors("AllowSpecificOrigin");
 app.MapControllers();
 
 // for playit.gg
-// app.Run("http://0.0.0.0:5272");
+app.Run("http://0.0.0.0:5272");
 
-app.Run();
+// for local development
+// app.Run();

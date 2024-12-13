@@ -36,18 +36,29 @@ public class UsersController : ControllerBase
         return Ok();
     }
 
+    public class LoginRequest
+    {
+        public string Username { get; set; }
+        public string Password { get; set; }
+    }
+
 
     [HttpPost("login")]
-    public async Task<IActionResult> Login([FromBody] string username, [FromBody] string password)
+    public async Task<IActionResult> Login([FromBody] LoginRequest data)
     {
-        var userFromDb = await _userService.GetByUsername(username);
+        var userFromDb = await _userService.GetByUsername(data.Username);
+
+        if (data == null || string.IsNullOrEmpty(data.Username) || string.IsNullOrEmpty(data.Password))
+        {
+            return BadRequest("Invalid request");
+        }
 
         if (userFromDb == null)
         {
             return NotFound("User not found");
         }
 
-        if (!userFromDb.VerifyPassword(password))
+        if (!userFromDb.VerifyPassword(data.Password))
         {
             return Unauthorized("Invalid password");
         }
