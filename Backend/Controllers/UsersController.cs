@@ -65,6 +65,31 @@ public class UsersController : ControllerBase
 
         // var token = JwtHelper.GenerateToken(userFromDb);
 
+        return Ok(userFromDb.Id);
+    }
+
+    public class CheckUserAndEmailRequest
+    {
+        public string Username { get; set; }
+        public string Email { get; set; }
+    }
+
+    [HttpPost("checkuserandemail")]
+    public async Task<IActionResult> CheckUsernameAndEmail([FromBody] CheckUserAndEmailRequest data)
+    {
+        var username = await _userService.GetByUsername(data.Username);
+        var email = await _userService.GetByEmail(data.Email);
+
+        if (username != null)
+        {
+            return Conflict("Username already exists");
+        }
+
+        if (email != null)
+        {
+            return Conflict("Email already exists");
+        }
+
         return Ok();
     }
 
