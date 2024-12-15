@@ -2,6 +2,7 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System.Collections.Generic;
 using PawpalBackend.Utils;
+using System.Text.Json.Serialization;
 
 namespace PawpalBackend.Models
 {
@@ -14,12 +15,15 @@ namespace PawpalBackend.Models
         [BsonElement("Username")]
         public string Username { get; set; }
 
+        [JsonIgnore]
         [BsonIgnore]
         public string Password { get; set; }
 
+        [JsonIgnore]
         [BsonElement("PasswordHash")]
         public string PasswordHash { get; set; }
 
+        [JsonIgnore]
         [BsonElement("PasswordSalt")]
         public string PasswordSalt { get; set; }
 

@@ -21,20 +21,18 @@ public class UsersController : ControllerBase
         _userService = userService;
     }
 
-    [Authorize] // Ensure the user is authenticated
+    [Authorize]
     [HttpGet("user-details")]
-    public IActionResult GetUserDetails()
+    public async Task<IActionResult> GetUserDetails()
     {
         var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        var username = User.FindFirst(ClaimTypes.Name)?.Value;
-        var email = User.FindFirst(ClaimTypes.Email)?.Value;
 
         if (userId == null)
         {
             return Unauthorized("User not found");
         }
 
-        var user = _userService.GetAsync(userId);
+        var user = await _userService.GetAsync(userId);
 
         return Ok(user);
     }
@@ -157,6 +155,9 @@ public class UsersController : ControllerBase
 
         await _userService.CreateAsync(newUser);
 
-        return CreatedAtAction(nameof(Login), newUser);
+        var token = JwtHelper.GenerateToken(newUser, "rhabiemaerhabiemaerhabiemaerhabi", "http://localhost:5272", "http://localhost:8081");
+
+        return CreatedAtAction(nameof(Login), new { token });
     }
+    // rhabiemaerhabiemaerhabiemaerhabi
 }
