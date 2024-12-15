@@ -1,4 +1,4 @@
-using MongoDB.Driver; 
+using MongoDB.Driver;
 using PawpalBackend.Models;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
@@ -25,6 +25,10 @@ namespace PawpalBackend.Services
         public async Task<List<Service>> GetAllServicesAsync() =>
             await _servicesCollection.Find(_ => true).ToListAsync();
 
+        // Find all service of a user
+        public async Task<List<Service>> GetServicesForUserAsync(string ServiceOwner) =>
+            await _servicesCollection.Find(s => s.ServiceOwner == ServiceOwner).ToListAsync();
+
         // Create a service
         public async Task CreateServiceAsync(Service newService) =>
             await _servicesCollection.InsertOneAsync(newService);
@@ -32,5 +36,9 @@ namespace PawpalBackend.Services
         // Delete a service
         public async Task DeleteServiceAsync(string id) =>
             await _servicesCollection.DeleteOneAsync(s => s.Id == id);
+
+        // Update a service
+        public async Task UpdateServiceAsync(string id, Service serviceIn) =>
+            await _servicesCollection.ReplaceOneAsync(s => s.Id == id, serviceIn);
     }
 }

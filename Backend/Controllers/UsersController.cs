@@ -93,7 +93,7 @@ public class UsersController : ControllerBase
         }
 
         var token = JwtHelper.GenerateToken(userFromDb, "rhabiemaerhabiemaerhabiemaerhabi", "http://localhost:5272", "http://localhost:8081");
-        return Ok(new { token });
+        return Ok(new { token, userFromDb.Id, userFromDb.Username, userFromDb.ProfilePicture, userFromDb.FirstName, userFromDb.LastName });
     }
 
     public class CheckUserAndEmailRequest
