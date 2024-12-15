@@ -43,7 +43,7 @@ public class UsersController : ControllerBase
 
         var user = await _userService.GetAsync(userId);
 
-        return Ok(new { user.Id, user.Username, user.ProfilePicture, user.FirstName, user.LastName });
+        return Ok(new { user.Id, user.Username, user.PhoneNumber, user.Email, user.ProfilePicture, user.FirstName, user.LastName,  user.Bio, user.Services, user.Pets});
     }
 
 
@@ -177,7 +177,6 @@ public class UsersController : ControllerBase
         return Ok(new { user.FirstName, user.LastName });
     }
 
-
     [Authorize]
     [HttpPut("update-profile")]
     public async Task<IActionResult> UpdateProfile([FromForm] UpdateProfileRequest request)
@@ -211,5 +210,4 @@ public class UsersController : ControllerBase
 
         return Ok("Profile updated successfully!");
     }
-
 }
