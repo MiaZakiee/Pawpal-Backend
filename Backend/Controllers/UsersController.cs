@@ -2,15 +2,24 @@ using Microsoft.AspNetCore.Mvc;
 using PawpalBackend.Models;
 using PawpalBackend.Services;
 using System.Threading.Tasks;
-using MongoDB.Bson;
-using System.Linq;
-using System;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
 
 // [ApiController]
 // [Route("api/[controller]")]
 // removed for simplicity
+
+public class UpdateProfileRequest
+{
+    public string Username { get; set; }
+    public string ContactNumber { get; set; }
+    public string Email { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public string Bio { get; set; }
+    public IFormFile ProfilePicture { get; set; }
+}
 [Route("users")]
 public class UsersController : ControllerBase
 {
@@ -167,4 +176,40 @@ public class UsersController : ControllerBase
         var user = await _userService.GetAsync(id);
         return Ok(new { user.FirstName, user.LastName });
     }
+
+
+    [Authorize]
+    [HttpPut("update-profile")]
+    public async Task<IActionResult> UpdateProfile([FromForm] UpdateProfileRequest request)
+    {
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+        if (userId == null)
+        {
+            return Unauthorized("User not found");
+        }
+
+        var user = await _userService.GetAsync(userId);
+        if (user == null)
+        {
+            return NotFound("User not found");
+        }
+
+        user.Username = request.Username;
+        user.PhoneNumber = request.ContactNumber;
+        user.Email = request.Email;
+        user.FirstName = request.FirstName;
+        user.LastName = request.LastName;
+        user.Bio = request.Bio;
+
+        if (request.ProfilePicture != null)
+        {
+            await _userService.SaveProfilePictureAsync(userId, request.ProfilePicture);
+        }
+
+        await _userService.UpdateAsync(userId, user);
+
+        return Ok("Profile updated successfully!");
+    }
+
 }
