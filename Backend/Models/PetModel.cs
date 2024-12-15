@@ -9,7 +9,7 @@ namespace PawpalBackend.Models
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public ObjectId Id { get; set; }
+        public string Id { get; set; }
 
         [BsonElement("name")]
         public string Name { get; set; }
@@ -25,6 +25,9 @@ namespace PawpalBackend.Models
 
         [BsonElement("owner")]
         public string Owner { get; set; } // Owner should be a user ID
+
+        [BsonElement("description")]
+        public string Description { get; set; }
 
         [BsonElement("profilePicture")]
         public string ProfilePicture { get; set; }

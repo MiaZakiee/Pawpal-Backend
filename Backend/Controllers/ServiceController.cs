@@ -4,7 +4,7 @@ using PawpalBackend.Services;
 using System.Threading.Tasks;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("services")]
 public class ServiceController : ControllerBase
 {
     private readonly ServiceServices _serviceService;
@@ -30,11 +30,11 @@ public class ServiceController : ControllerBase
         return Ok(service);
     }
 
-    [HttpPost]
-    public async Task<IActionResult> CreateService([FromBody] Service newService)
+    [HttpPost("addservice")]
+    public async Task<IActionResult> AddService([FromBody] Service service)
     {
-        await _serviceService.CreateServiceAsync(newService);
-        return CreatedAtAction(nameof(GetServiceById), new { id = newService.Id }, newService);
+        await _serviceService.CreateServiceAsync(service);
+        return CreatedAtAction(nameof(GetServiceById), new { id = service.Id }, service);
     }
 
     [HttpDelete("{id}")]
@@ -44,4 +44,3 @@ public class ServiceController : ControllerBase
         return NoContent();
     }
 }
-    

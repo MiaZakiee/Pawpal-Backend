@@ -19,6 +19,7 @@ builder.Services.Configure<DatabaseSettings>(
 // Register UserService as a singleton
 builder.Services.AddSingleton<UserService>();
 builder.Services.AddSingleton<PetsService>();
+builder.Services.AddSingleton<ServiceServices>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
