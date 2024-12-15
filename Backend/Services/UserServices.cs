@@ -41,6 +41,10 @@ namespace PawpalBackend.Services
         public async Task<User> GetByEmail(string email) =>
             await _usersCollection.Find(x => x.Email == email).FirstOrDefaultAsync();
 
+        // Find user by phonenumber
+        public async Task<User> GetByPhoneNumber(string phoneNumber) =>
+            await _usersCollection.Find(x => x.PhoneNumber == phoneNumber).FirstOrDefaultAsync();
+
         // Create user
         public async Task CreateAsync(User newUser) =>
             await _usersCollection.InsertOneAsync(newUser);

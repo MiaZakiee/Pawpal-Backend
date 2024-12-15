@@ -4,6 +4,9 @@ using PawpalBackend.Services;
 using System.Threading.Tasks;
 using MongoDB.Bson;
 using System.Linq;
+using System;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 // [ApiController]
 // [Route("api/[controller]")]
@@ -17,6 +20,25 @@ public class UsersController : ControllerBase
     {
         _userService = userService;
     }
+
+    [Authorize] // Ensure the user is authenticated
+    [HttpGet("user-details")]
+    public IActionResult GetUserDetails()
+    {
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        var username = User.FindFirst(ClaimTypes.Name)?.Value;
+        var email = User.FindFirst(ClaimTypes.Email)?.Value;
+
+        if (userId == null)
+        {
+            return Unauthorized("User not found");
+        }
+
+        var user = _userService.GetAsync(userId);
+
+        return Ok(user);
+    }
+
 
     [HttpGet("available")]
     public async Task<IActionResult> GetUser([FromQuery] string username, [FromQuery] string email)
@@ -46,12 +68,12 @@ public class UsersController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginRequest data)
     {
-        var userFromDb = await _userService.GetByUsername(data.Username);
-
         if (data == null || string.IsNullOrEmpty(data.Username) || string.IsNullOrEmpty(data.Password))
         {
             return BadRequest("Invalid request");
         }
+
+        var userFromDb = await _userService.GetByUsername(data.Username);
 
         if (userFromDb == null)
         {
@@ -63,9 +85,8 @@ public class UsersController : ControllerBase
             return Unauthorized("Invalid password");
         }
 
-        // var token = JwtHelper.GenerateToken(userFromDb);
-
-        return Ok(userFromDb.Id);
+        var token = JwtHelper.GenerateToken(userFromDb, "rhabiemaerhabiemaerhabiemaerhabi", "http://localhost:5272", "http://localhost:8081");
+        return Ok(new { Token = token });
     }
 
     public class CheckUserAndEmailRequest
@@ -93,8 +114,8 @@ public class UsersController : ControllerBase
         return Ok();
     }
 
-    [HttpPost("register")]
-    public async Task<IActionResult> Register([FromBody] User newUser)
+    [HttpPost("registerPostman")]
+    public async Task<IActionResult> RegisterPostman([FromBody] User newUser)
     {
         var userFromDb = await _userService.GetByUsername(newUser.Username);
 
@@ -108,6 +129,33 @@ public class UsersController : ControllerBase
 
         await _userService.CreateAsync(newUser);
 
+
+        return CreatedAtAction(nameof(Login), newUser);
+    }
+
+    [HttpPost("register")]
+    public async Task<IActionResult> Register([FromBody] User newUser)
+    {
+
+        var userFromDb = await _userService.GetByUsername(newUser.Username);
+
+        var phonenumber = await _userService.GetByPhoneNumber(newUser.PhoneNumber);
+
+        if (phonenumber != null)
+        {
+            return Conflict("User with this phone number already exists");
+        }
+
+        if (userFromDb != null)
+        {
+            return Conflict("Username already exists");
+        }
+
+        newUser.SetPassword(newUser.Password);
+
+        newUser.Password = null;
+
+        await _userService.CreateAsync(newUser);
 
         return CreatedAtAction(nameof(Login), newUser);
     }
