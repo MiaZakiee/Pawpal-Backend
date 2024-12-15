@@ -4,7 +4,7 @@ using PawpalBackend.Services;
 using System.Threading.Tasks;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("booking")]
 public class BookingController : ControllerBase
 {
     private readonly BookingService _bookingService;
@@ -13,7 +13,7 @@ public class BookingController : ControllerBase
         _bookingService = bookingService;
     }
     
-    [HttpPost]
+    [HttpPost("create")]
     public async Task<IActionResult> CreateBooking([FromBody] Booking booking)
     {
         await _bookingService.CreateBookingAsync(booking);

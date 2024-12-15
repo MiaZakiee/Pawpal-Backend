@@ -17,8 +17,10 @@ namespace PawpalBackend.Models {
         public string DateOfBooking { get; set; }
         [BsonElement("Location")]
         public string Location { get; set; }
-        [BsonElement("Services")]
-        public List<string> Services { get; set; } = new List<string>();
+        [BsonElement("Service")]
+        // public List<string> Services { get; set; } = new List<string>();
+        // Edited for ease because we are going to die if not
+        public string Service { get; set; }
         [BsonElement("AddtionalInformation")]
         public string AddtionalInfo { get; set; }
         [BsonElement("TotalPrice")]

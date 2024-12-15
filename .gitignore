@@ -16,3 +16,4 @@ Backend/obj/project.assets.json
 *.deps.json
 *AssemblyInfo.cs
 *.sourcelink.json
+Backend/obj

@@ -42,18 +42,19 @@ namespace PawpalBackend.Services
             await _bookingCollection.DeleteOneAsync(x => x.Id == id);
 
         // Add service to booking
-        public async Task AddServiceToBookingAsync(string userId, string serviceId)
+        public async Task AddServiceToBookingAsync(string bookingId, string serviceId)
         {
-            var update = Builders<Booking>.Update.AddToSet(u => u.Services, serviceId);
-            await _bookingCollection.UpdateOneAsync(u => u.Id == userId, update);
+            var update = Builders<Booking>.Update.Set(u => u.Service, serviceId);
+            await _bookingCollection.UpdateOneAsync(u => u.Id == bookingId, update);
         }
 
         // Remove service from booking
-        public async Task RemoveServiceFromBookingAsync(string userId, string serviceId)
+        public async Task RemoveServiceFromBookingAsync(string bookingId)
         {
-            var update = Builders<Booking>.Update.Pull(u => u.Services, serviceId);
-            await _bookingCollection.UpdateOneAsync(u => u.Id == userId, update);
+            var update = Builders<Booking>.Update.Set(u => u.Service, null);
+            await _bookingCollection.UpdateOneAsync(u => u.Id == bookingId, update);
         }
+
     }
     
 }
