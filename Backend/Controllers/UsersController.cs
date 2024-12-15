@@ -160,4 +160,11 @@ public class UsersController : ControllerBase
         return CreatedAtAction(nameof(Login), new { token });
     }
     // rhabiemaerhabiemaerhabiemaerhabi
+
+    [HttpGet("fetch-name")]
+    public async Task<IActionResult> FetchName([FromQuery] string id)
+    {
+        var user = await _userService.GetAsync(id);
+        return Ok(new { user.FirstName, user.LastName });
+    }
 }
