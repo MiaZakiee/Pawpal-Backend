@@ -8,6 +8,11 @@ namespace PawpalBackend.Utils
     {
         public static void CreatePasswordHash(string password, out string passwordHash, out string passwordSalt)
         {
+            if (string.IsNullOrEmpty(password))  // Check for null or empty password
+            {
+                throw new ArgumentException("Password cannot be null or empty", nameof(password));
+            }
+
             using (var hmac = new HMACSHA512())
             {
                 var saltBytes = hmac.Key;

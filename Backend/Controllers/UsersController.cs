@@ -34,7 +34,7 @@ public class UsersController : ControllerBase
 
         var user = await _userService.GetAsync(userId);
 
-        return Ok(user);
+        return Ok(new { user.Id, user.Username, user.ProfilePicture, user.FirstName, user.LastName });
     }
 
 
@@ -121,9 +121,9 @@ public class UsersController : ControllerBase
         {
             return Conflict("Username already exists");
         }
-        newUser.SetPassword(newUser.Password);
+        newUser.SetPassword(newUser.password);
 
-        newUser.Password = null;
+        newUser.password = null;
 
         await _userService.CreateAsync(newUser);
 
@@ -149,9 +149,9 @@ public class UsersController : ControllerBase
             return Conflict("Username already exists");
         }
 
-        newUser.SetPassword(newUser.Password);
+        newUser.SetPassword(newUser.password);
 
-        newUser.Password = null;
+        newUser.password = null;
 
         await _userService.CreateAsync(newUser);
 
