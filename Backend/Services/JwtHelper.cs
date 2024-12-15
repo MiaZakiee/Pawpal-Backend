@@ -25,7 +25,7 @@ public static class JwtHelper
             issuer: issuer,
             audience: audience,
             claims: claims,
-            expires: DateTime.Now.AddHours(1), // Token expiration
+            expires: DateTime.Now.AddHours(12), // Token expiration
             signingCredentials: creds
         );
 

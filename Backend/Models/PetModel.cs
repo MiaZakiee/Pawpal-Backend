@@ -14,16 +14,21 @@ namespace PawpalBackend.Models
         [BsonElement("name")]
         public string Name { get; set; }
 
-        [BsonElement("type")]
-        public string Type { get; set; }
+        [BsonElement("Sex")]
+        public string Sex { get; set; }
 
         [BsonElement("breed")]
         public string Breed { get; set; }
 
-        [BsonElement("age")]
-        public int Age { get; set; }
+        [BsonElement("Birthday")]
+        public string Birthday { get; set; }
 
         [BsonElement("owner")]
         public string Owner { get; set; } // Owner should be a user ID
+
+        [BsonElement("profilePicture")]
+        public string ProfilePicture { get; set; }
+
+
     }
 }

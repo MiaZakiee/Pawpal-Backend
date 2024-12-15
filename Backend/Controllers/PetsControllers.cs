@@ -27,7 +27,7 @@ public class PetsController : ControllerBase
         return CreatedAtAction(nameof(GetPets), new { userId = newPet.Owner }, newPet);
     }
 
-    [HttpPost("{userId}")]
+    [HttpGet("{userId}")]
     public async Task<IActionResult> GetPets(string userId)
     {
         var pets = await _petsService.GetPetsForUserAsync(userId);
