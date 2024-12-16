@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
+using System;
 
 // [ApiController]
 // [Route("api/[controller]")]
@@ -40,7 +41,9 @@ public class UsersController : ControllerBase
             return NotFound("User not found");
         }
 
-        return Ok(new { user.Id, user.Username, user.ProfilePicture, user.FirstName, user.LastName, user.Email, user.PhoneNumber, user.Bio });
+        var profilePictureBase64 = user.ProfilePicture != null ? Convert.ToBase64String(user.ProfilePicture) : null;
+
+        return Ok(new { user.Id, user.Username, ProfilePicture = profilePictureBase64, user.FirstName, user.LastName, user.Email, user.PhoneNumber, user.Bio });
     }
 
     [Authorize]
