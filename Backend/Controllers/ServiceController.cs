@@ -21,12 +21,17 @@ public class ServiceController : ControllerBase
         return Ok(services);
     }
 
+    //Find services by user 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetServiceById(string id)
     {
         var service = await _serviceService.GetServiceByIdAsync(id);
+
         if (service == null)
-            return NotFound();
+        {
+            return NotFound("Service not found");
+        }
+
         return Ok(service);
     }
 

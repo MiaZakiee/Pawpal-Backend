@@ -56,7 +56,7 @@ public class UsersController : ControllerBase
 
         var user = await _userService.GetAsync(userId);
 
-        return Ok(new { user.Id, user.Username, user.PhoneNumber, user.Email, user.ProfilePicture, user.FirstName, user.LastName,  user.Bio, user.Services, user.Pets});
+        return Ok(new { user.Id, user.Username, user.PhoneNumber, user.Email, user.ProfilePicture, user.FirstName, user.LastName, user.Bio, user.Services, user.Pets });
     }
 
 
@@ -190,9 +190,16 @@ public class UsersController : ControllerBase
         return Ok(new { user.FirstName, user.LastName });
     }
 
-    [Authorize]
-    [HttpPut("update-profile")]
-    public async Task<IActionResult> UpdateProfile([FromForm] UpdateProfileRequest request)
+    // [HttpPut("{id}")]
+    // public async Task<IActionResult> UpdateProfile2([FromBody] User updatedUser, string id)
+    // {
+    //     User updated = await _userService.UpdateAsync(id, updatedUser);
+
+    //     return Ok(updated);
+    // }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateProfile([FromForm] UpdateProfileRequest request, string id)
     {
         var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
