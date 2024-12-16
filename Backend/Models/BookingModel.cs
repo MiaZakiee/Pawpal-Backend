@@ -11,8 +11,8 @@ namespace PawpalBackend.Models {
         public string RecipientId { get; set; }
         [BsonElement("ProviderId")]
         public string ProviderId { get; set; }
-        [BsonElement("PetId")]
-        public string PetId { get; set; }
+        [BsonElement("PetName")]
+        public string PetName { get; set; }
         [BsonElement("DateOfBooking")]
         public string DateOfBooking { get; set; }
         [BsonElement("Location")]
