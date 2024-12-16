@@ -21,6 +21,13 @@ public class ServiceController : ControllerBase
         return Ok(services);
     }
 
+    [HttpGet("all/{id}")]
+    public async Task<IActionResult> GetServicesExceptUser(string id)
+    {
+        var services = await _serviceService.GetServicesExceptUserAsync(id);
+        return Ok(services);
+    }
+
     //Find services by user 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetServiceById(string id)

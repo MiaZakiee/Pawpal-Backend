@@ -25,6 +25,10 @@ namespace PawpalBackend.Services
         public async Task<List<Service>> GetAllServicesAsync() =>
             await _servicesCollection.Find(_ => true).ToListAsync();
 
+        // Find all services except that of user
+        public async Task<List<Service>> GetServicesExceptUserAsync(string ServiceOwner) =>
+            await _servicesCollection.Find(s => s.ServiceOwner != ServiceOwner).ToListAsync();
+
         // Find all service of a user
         public async Task<List<Service>> GetServicesForUserAsync(string ServiceOwner) =>
             await _servicesCollection.Find(s => s.ServiceOwner == ServiceOwner).ToListAsync();
