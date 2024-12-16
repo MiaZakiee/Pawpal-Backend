@@ -119,3 +119,8 @@
 /home/rei/Documents/CSIT321/Pawpal/Pawpal-Backend/Backend/obj/Debug/net8.0/PawpalBackend.pdb
 /home/rei/Documents/CSIT321/Pawpal/Pawpal-Backend/Backend/obj/Debug/net8.0/PawpalBackend.genruntimeconfig.cache
 /home/rei/Documents/CSIT321/Pawpal/Pawpal-Backend/Backend/obj/Debug/net8.0/ref/PawpalBackend.dll
+/home/ninin/Projects/Pawpal-Backend/Backend/bin/Debug/net8.0/Microsoft.OpenApi.dll
+/home/ninin/Projects/Pawpal-Backend/Backend/bin/Debug/net8.0/Swashbuckle.AspNetCore.Swagger.dll
+/home/ninin/Projects/Pawpal-Backend/Backend/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+/home/ninin/Projects/Pawpal-Backend/Backend/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerUI.dll
+/home/ninin/Projects/Pawpal-Backend/Backend/obj/Debug/net8.0/PawpalBackend.MvcApplicationPartsAssemblyInfo.cs

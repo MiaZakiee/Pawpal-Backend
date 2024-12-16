@@ -30,6 +30,19 @@ public class UsersController : ControllerBase
         _userService = userService;
     }
 
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetUser(string id)
+    {
+        var user = await _userService.GetAsync(id);
+
+        if (user == null)
+        {
+            return NotFound("User not found");
+        }
+
+        return Ok(new { user.Id, user.Username, user.ProfilePicture, user.FirstName, user.LastName, user.Email, user.PhoneNumber, user.Bio });
+    }
+
     [Authorize]
     [HttpGet("user-details")]
     public async Task<IActionResult> GetUserDetails()

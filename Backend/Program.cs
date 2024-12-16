@@ -38,6 +38,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+builder.Services.AddEndpointsApiExplorer(); // For minimal APIs
+builder.Services.AddSwaggerGen(); // Adds Swagger generation
+
 // Define a CORS policy
 builder.Services.AddCors(options =>
 {
@@ -56,6 +59,8 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
+    app.UseSwagger(); // Enables the generation of the Swagger JSON
+    app.UseSwaggerUI(); // Enables Swagger UI for visualizing APIs
 }
 
 app.UseAuthentication();
