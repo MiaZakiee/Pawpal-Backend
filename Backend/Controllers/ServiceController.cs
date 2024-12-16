@@ -14,7 +14,7 @@ public class ServiceController : ControllerBase
         _serviceService = serviceServices;
     }
 
-    [HttpGet]
+    [HttpGet("all")]
     public async Task<IActionResult> GetAllServices()
     {
         var services = await _serviceService.GetAllServicesAsync();

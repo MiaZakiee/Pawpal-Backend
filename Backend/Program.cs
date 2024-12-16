@@ -6,6 +6,8 @@ using Microsoft.Extensions.Options;
 using PawpalBackend.Models;
 using PawpalBackend.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Net;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +22,7 @@ builder.Services.Configure<DatabaseSettings>(
 builder.Services.AddSingleton<UserService>();
 builder.Services.AddSingleton<PetsService>();
 builder.Services.AddSingleton<ServiceServices>();
+builder.Services.AddSingleton<BookingService>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
