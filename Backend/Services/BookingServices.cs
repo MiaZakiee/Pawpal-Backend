@@ -21,6 +21,10 @@ namespace PawpalBackend.Services
         public async Task<List<Booking>> GetBookingListAsync() =>
             await _bookingCollection.Find(_ => true).ToListAsync();
 
+        // Get All Bookings Except Those Owned By User
+        public async Task<List<Booking>> GetBookingListExceptUserAsync(string userId) =>
+            await _bookingCollection.Find(x => x.RecipientId != userId).ToListAsync();
+
         // Create Booking
         public async Task CreateBookingAsync(Booking newBooking) =>     
             await _bookingCollection.InsertOneAsync(newBooking);
