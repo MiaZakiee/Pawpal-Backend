@@ -20,10 +20,12 @@ public class BookingController : ControllerBase
         return CreatedAtAction(nameof(GetBookingById), new { id = booking.Id }, booking);
     }
 
-    [HttpGet("history/{id}")]
+    [HttpGet("history/by-recipient/{id}")]
     public async Task<IActionResult> GetBookingsExceptByRecipientId(string recipientId)
     {
         var bookings = await _bookingService.GetBookingListExceptUserAsync(recipientId);
+        if (bookings == null)
+            return NotFound();
         return Ok(bookings);
     }
     [HttpGet]
