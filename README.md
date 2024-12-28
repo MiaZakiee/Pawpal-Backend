@@ -1,2 +1,2 @@
 # Pawpal-Backend
-Backshots
+Backend server for Pawpal services.
